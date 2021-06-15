@@ -7,7 +7,7 @@ unsetopt beep
 bindkey -v
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/madero/.zshrc'
+zstyle :compinstall filename '$HOME/.zshrc'
 zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate _prefix
 zstyle ':completion:*' expand prefix
 zstyle ':completion:*' list-colors ''
@@ -16,7 +16,7 @@ zstyle ':completion:*' list-suffixes true
 zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]} r:|[._-]=** r:|=**' 'm:{[:lower:]}={[:upper:]}' 'm:{[:lower:]}={[:upper:]}' 'm:{[:lower:]}={[:upper:]}'
 zstyle ':completion:*' menu select=1
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-zstyle :compinstall filename '/home/madero/.zshrc'
+zstyle :compinstall filename '$HOME/.zshrc'
 
 autoload -Uz compinit
 # End of lines added by compinstall
