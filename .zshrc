@@ -7,17 +7,13 @@ unsetopt beep
 bindkey -v
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '$HOME/.zshrc'
-zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate _prefix
-zstyle ':completion:*' expand prefix
-zstyle ':completion:*' list-colors ''
-zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
-zstyle ':completion:*' list-suffixes true
-zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]} r:|[._-]=** r:|=**' 'm:{[:lower:]}={[:upper:]}' 'm:{[:lower:]}={[:upper:]}' 'm:{[:lower:]}={[:upper:]}'
-zstyle ':completion:*' menu select=1
-zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-zstyle :compinstall filename '$HOME/.zshrc'
-
+zstyle ':completion:*' completer _extensions _complete _approximate
+zstyle ':completion:*' menu select
+zstyle ':completion:*' group-name ''
+# zstyle ':completion:*' list-colors ''
+dircolors | source /dev/stdin
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 autoload -Uz compinit
 # End of lines added by compinstall
 # The following lines are custom
@@ -33,7 +29,7 @@ compinit -C
 source $HOME/.zsh/z/zsh-z.plugin.zsh
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
-zstyle ':vcs_info:*' enable git svn
+zstyle ':vcs_info:*' enable git svn hg
 zstyle ':vcs_info:*' actionformats '%F{5}(%F{3}%s:%b|%a%F{5})%f '
 zstyle ':vcs_info:*' formats '%F{5}(%F{3}%s:%b%F{5})%f '
 zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b:%r'
@@ -49,6 +45,9 @@ PROMPT='%m:%F{4}%2~/%f ${vcs_info_msg_0_}%# '
 RPROMPT="%(?..return code:%? )%(1j.jobs:%j .)[%T]"
 
 PATH=$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH
+alias ls='ls --color=auto'
 alias ll='ls -l --color=auto'
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/terraform terraform
+alias launch_jenkins='docker run -d --restart unless-stopped -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts-jdk11'
 # End of custom lines
-
